@@ -1,0 +1,35 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  padding: 10px, 0;
+}
+
+.main {
+  /* display: flex; */
+  /* justify-content: center; */
+  max-width: 900px;
+  flex: 1;
+}
+
+.pcNavMenu {
+  display: flex;
+}
+
+.pcNavMenu li {
+  margin-right: 10px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    min-width: 400px;
+  }
+  .pcNavMenu {
+    display: none;
+  }
+}
