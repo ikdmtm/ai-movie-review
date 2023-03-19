@@ -1,5 +1,9 @@
 import "src/styles/globals.css";
+import { useHandleMenu } from "../hooks/useHandleMenu";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+const App = ({ Component, pageProps }) => {
+  const handleOpen = useHandleMenu();
+  return <Component {...pageProps} {...handleOpen} />;
+};
+
+export default App;
