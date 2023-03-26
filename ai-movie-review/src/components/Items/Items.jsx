@@ -1,51 +1,75 @@
 import styles from "src/components/Items/Items.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
-const ITEMS = [
-  { src: "/inseption.jpg", title: "インセプション", category: "SF", year: 2012 },
-  { src: "/babydriver.jpg", title: "ベイビードライバー", category: "アクション", year: 2016 },
-  { src: "/iamlegend.jpg", title: "アイアムレジェンド", category: "SF", year: 2007 },
-  { src: "/mist.jpg", title: "ミスト", category: "ホラー", year: 2000 },
-  { src: "/pulpfiction.jpg", title: "パルプフィクション", category: "アクション", year: 1970 },
-  { src: "/inseption.jpg", title: "インセプション", category: "SF", year: 2012 },
-  { src: "/babydriver.jpg", title: "ベイビードライバー", category: "アクション", year: 2016 },
-  { src: "/iamlegend.jpg", title: "アイアムレジェンド", category: "SF", year: 2007 },
-  { src: "/mist.jpg", title: "ミスト", category: "ホラー", year: 2000 },
-  { src: "/pulpfiction.jpg", title: "パルプフィクション", category: "アクション", year: 1970 },
+const categories = [
+  { id: 28, name: "アクション" },
+  { id: 12, name: "アドベンチャー" },
+  { id: 16, name: "アニメ" },
+  { id: 35, name: "コメディ" },
+  { id: 80, name: "クライム" },
+  { id: 99, name: "ドキュメンタリー" },
+  { id: 18, name: "ドラマ" },
+  { id: 10751, name: "ファミリー" },
+  { id: 14, name: "ファンタジー" },
+  { id: 36, name: "歴史" },
+  { id: 27, name: "ホラー" },
+  { id: 10402, name: "音楽" },
+  { id: 9648, name: "ミステリー" },
+  { id: 10749, name: "ロマンス" },
+  { id: 878, name: "SF" },
+  { id: 10770, name: "テレビ映画" },
+  { id: 53, name: "スリラー" },
+  { id: 10752, name: "戦争" },
+  { id: 37, name: "西洋" },
 ];
 
-export const Items = () => {
-  const categoryColor = (item) => {
-    switch (item.category) {
-      case "SF":
-        return styles.sf;
-      case "アクション":
-        return styles.action;
-      case "ホラー":
-        return styles.horror;
-      default:
-        return "";
-    }
-  };
+const getCategory = (item) => {
+  const ids = item.genre_ids;
+  let genreName = [];
+  ids.forEach((id) => {
+    categories.forEach((genre) => {
+      if (id == genre.id) {
+        genreName = [...genreName, genre.name];
+      }
+    });
+  });
+  return genreName;
+};
+
+export const Items = (props) => {
   return (
     <div className={styles.items}>
-      {ITEMS.map((item) => {
-        return (
-          <div className={styles.item} key={item.src}>
-            {/* <Image src="/inseption.jpg" alt="Picture of the author" width={180} height={240} /> */}
-            <div className={styles.image}>
-              <Image src={item.src} alt="Picture of the author" layout="fill" />
+      {props.moviesData ? (
+        props.moviesData.map((item) => {
+          return (
+            <div className={styles.item} key={item.src}>
+              <Link href={"/movies/" + `${item.id}`}>
+                <div className={styles.image}>
+                  <Image
+                    src={"http://image.tmdb.org/t/p/w342" + `${item.poster_path}`}
+                    alt={`${item.title}` + "のポスター"}
+                    layout="fill"
+                  />
+                </div>
+                <div className={styles.discription}>
+                  <p className={styles.title}>{item.title}</p>
+                  <div className={styles.subDiscription}>
+                    <div className={styles.categories}>
+                      {getCategory(item).map((cate) => {
+                        return <p className={styles.category}>{cate}</p>;
+                      })}
+                    </div>
+                    <p className={styles.year}>{item.release_date}</p>
+                  </div>
+                </div>
+              </Link>
             </div>
-            <div className={styles.discription}>
-              <p className={styles.title}>{item.title}</p>
-              <div className={styles.subDiscription}>
-                <p className={`${styles.category} ${categoryColor(item)}`}>{item.category}</p>
-                <p className={styles.year}>{item.year}</p>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <p>データがありません</p>
+      )}
     </div>
   );
 };

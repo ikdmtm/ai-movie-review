@@ -7,14 +7,14 @@
 .item {
   /* flex: 1; */
   /* width: 300px; */
-  width: 25%;
-  padding: 20px;
+  width: 20%;
+  padding: 5px;
 }
 
 .item:hover {
   cursor: pointer;
   opacity: 0.8;
-  padding: 15px;
+  padding: 1px;
 }
 
 .image {
@@ -22,6 +22,10 @@
   /* height: 250px; */
   position: relative;
   aspect-ratio: 1 / 1.4;
+}
+
+.image img {
+  width: 100%;
 }
 
 .discription {
@@ -33,31 +37,20 @@
 
 .title {
   font-size: 14px;
-  /* display: none; */
+}
+
+.categories {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .category {
   font-size: 12px;
-  color: rgb(125, 125, 125);
-  margin-right: 10px;
-}
-
-.sf {
-  /* color: aliceblue; */
-  /* background-color: rgb(94, 94, 255); */
-  color: rgb(94, 94, 255);
-}
-
-.action {
-  /* color: aliceblue; */
-  /* background-color: rgb(255, 94, 94); */
-  color: rgb(255, 94, 94);
-}
-
-.horror {
-  /* color: aliceblue; */
-  /* background-color: rgb(172, 94, 255); */
-  color: rgb(172, 94, 255);
+  color: rgb(223, 223, 223);
+  margin: 3px;
+  padding: 2px 4px;
+  background-color: rgb(92, 92, 92);
 }
 
 .subDiscription {
@@ -82,7 +75,7 @@
     padding: 10px;
   }
 
-  .description {
-    padding: 10px 0 5px 0;
+  .discription {
+    padding: 5px 0 5px 0;
   }
 }
