@@ -21,7 +21,7 @@ const categories = [
   { id: 10402, name: "音楽" },
   { id: 9648, name: "ミステリー" },
   { id: 10749, name: "ロマンス" },
-  { id: 878, name: "サイエンスフィクション" },
+  { id: 878, name: "SF" },
   { id: 10770, name: "テレビ映画" },
   { id: 53, name: "スリラー" },
   { id: 10752, name: "戦争" },
@@ -38,9 +38,6 @@ export const Main = (props) => {
       {props.open ? <NavMenu handleMenu={props.handleMenu} categories={categories} /> : null}
       <div>
         <ul className={styles.pcNavMenu}>
-          {/* {genres.map((genre) => (
-            <li>{genre.name}</li>
-          ))} */}
           <Link href={"/popular"}>
             <li className={router.route == "/popular" ? styles.pageTitle : null}>最近の人気</li>
           </Link>
@@ -57,7 +54,7 @@ export const Main = (props) => {
       </div>
 
       <main className={styles.main}>
-        <Items moviesData={props.moviesData} />
+        <Items moviesData={props.moviesData} categories={categories} />
       </main>
       <Footer />
     </div>
