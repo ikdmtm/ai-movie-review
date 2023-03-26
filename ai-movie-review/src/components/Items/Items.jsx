@@ -2,29 +2,7 @@ import styles from "src/components/Items/Items.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const categories = [
-  { id: 28, name: "アクション" },
-  { id: 12, name: "アドベンチャー" },
-  { id: 16, name: "アニメ" },
-  { id: 35, name: "コメディ" },
-  { id: 80, name: "クライム" },
-  { id: 99, name: "ドキュメンタリー" },
-  { id: 18, name: "ドラマ" },
-  { id: 10751, name: "ファミリー" },
-  { id: 14, name: "ファンタジー" },
-  { id: 36, name: "歴史" },
-  { id: 27, name: "ホラー" },
-  { id: 10402, name: "音楽" },
-  { id: 9648, name: "ミステリー" },
-  { id: 10749, name: "ロマンス" },
-  { id: 878, name: "SF" },
-  { id: 10770, name: "テレビ映画" },
-  { id: 53, name: "スリラー" },
-  { id: 10752, name: "戦争" },
-  { id: 37, name: "西洋" },
-];
-
-const getCategory = (item) => {
+const getCategory = (item, categories) => {
   const ids = item.genre_ids;
   let genreName = [];
   ids.forEach((id) => {
@@ -56,7 +34,7 @@ export const Items = (props) => {
                   <p className={styles.title}>{item.title}</p>
                   <div className={styles.subDiscription}>
                     <div className={styles.categories}>
-                      {getCategory(item).map((cate) => {
+                      {getCategory(item, props.categories).map((cate) => {
                         return <p className={styles.category}>{cate}</p>;
                       })}
                     </div>
