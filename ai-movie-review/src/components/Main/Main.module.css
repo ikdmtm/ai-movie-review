@@ -45,6 +45,11 @@
   margin-bottom: 10px;
 }
 
+.year {
+  color: rgb(101, 101, 101);
+  margin-bottom: 10px;
+}
+
 .movieDiscription {
   color: rgb(101, 101, 101);
 }
