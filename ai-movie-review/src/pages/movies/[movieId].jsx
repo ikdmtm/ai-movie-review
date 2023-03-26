@@ -82,6 +82,7 @@ const Show = (props) => {
               </div>
               <div className={styles.right}>
                 <p className={styles.movieTitle}>{props.movie.title}</p>
+                <p className={styles.year}>{props.movie.release_date}</p>
                 <p className={styles.movieDiscription}>{props.movie.overview}</p>
                 <div className={styles.categories}>
                   {props.movie.genres.map((genre) => {
