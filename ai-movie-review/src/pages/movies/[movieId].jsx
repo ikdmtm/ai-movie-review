@@ -7,14 +7,13 @@ import { Header } from "@/src/components/Header/Header";
 import { NavMenu } from "@/src/components/NavMenu/NavMenu";
 import { Footer } from "@/src/components/Footer/Footer";
 import { Items } from "@/src/components/Items/Items";
-// import { useCallback, useEffect, useState } from "react";
 
 const categories = [
   { id: 28, name: "アクション" },
   { id: 12, name: "アドベンチャー" },
   { id: 16, name: "アニメーション" },
   { id: 35, name: "コメディ" },
-  { id: 80, name: "犯罪" },
+  { id: 80, name: "クライム" },
   { id: 99, name: "ドキュメンタリー" },
   { id: 18, name: "ドラマ" },
   { id: 10751, name: "ファミリー" },
@@ -24,7 +23,7 @@ const categories = [
   { id: 10402, name: "音楽" },
   { id: 9648, name: "謎" },
   { id: 10749, name: "ロマンス" },
-  { id: 878, name: "サイエンスフィクション" },
+  { id: 878, name: "SF" },
   { id: 10770, name: "テレビ映画" },
   { id: 53, name: "スリラー" },
   { id: 10752, name: "戦争" },
@@ -32,6 +31,8 @@ const categories = [
 ];
 
 const Show = (props) => {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -52,17 +53,18 @@ const Show = (props) => {
         {props.open ? <NavMenu handleMenu={props.handleMenu} categories={categories} /> : null}
         <div>
           <ul className={styles.pcNavMenu}>
-            {/* {genres.map((genre) => (
-            <li>{genre.name}</li>
-          ))} */}
             <Link href={"/popular"}>
-              <li>最近の人気</li>
+              <li className={router.route == "/popular" ? styles.pageTitle : null}>最近の人気</li>
             </Link>
             <Link href={"/"}>
-              <li>評価が高い映画</li>
+              <li className={router.route == "/" ? styles.pageTitle : null}>評価が高い映画</li>
             </Link>
-            <li>上映中</li>
-            <li>上映予定</li>
+            <Link href={"/now_playing"}>
+              <li className={router.route == "/now_playing" ? styles.pageTitle : null}>上映中</li>
+            </Link>
+            <Link href={"/upcoming"}>
+              <li className={router.route == "/upcoming" ? styles.pageTitle : null}>近日公開</li>
+            </Link>
           </ul>
         </div>
         <div className={styles.title}>
