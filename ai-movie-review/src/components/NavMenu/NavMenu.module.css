@@ -1,11 +1,10 @@
 .navMenu {
-  position: absolute;
-  top: 50px;
-  right: 0;
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 5;
   transition: all 2s 0s linear;
 }
@@ -19,15 +18,21 @@
   margin: 0;
   width: 40%;
   background-color: white;
-  padding: 20px;
+  /* padding: 0 20px; */
 }
 
 .navItems li {
   margin-bottom: 10px;
 }
 
-.manuButton {
+/* .manuButton {
   position: absolute;
   top: 0;
   right: 0;
+} */
+
+.closeButton {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
 }
