@@ -6,37 +6,21 @@ import { Footer } from "src/components/Footer/Footer.jsx";
 import { NavMenu } from "src/components/NavMenu/NavMenu.jsx";
 import { Items } from "src/components/Items/Items.jsx";
 
-const categories = [
-  { id: 28, name: "アクション" },
-  { id: 12, name: "アドベンチャー" },
-  { id: 16, name: "アニメーション" },
-  { id: 35, name: "コメディ" },
-  { id: 80, name: "クライム" },
-  { id: 99, name: "ドキュメンタリー" },
-  { id: 18, name: "ドラマ" },
-  { id: 10751, name: "ファミリー" },
-  { id: 14, name: "ファンタジー" },
-  { id: 36, name: "歴史" },
-  { id: 27, name: "ホラー" },
-  { id: 10402, name: "音楽" },
-  { id: 9648, name: "ミステリー" },
-  { id: 10749, name: "ロマンス" },
-  { id: 878, name: "SF" },
-  { id: 10770, name: "テレビ映画" },
-  { id: 53, name: "スリラー" },
-  { id: 10752, name: "戦争" },
-  { id: 37, name: "西洋" },
-];
-
 export const Main = (props) => {
   console.log("Main", props);
   const router = useRouter();
+  console.log("router", router);
 
   return (
     <div className={styles.container}>
+      <Header
+        handleMenu={props.handleMenu}
+        open={props.open}
         text={props.text}
         handleChange={props.handleChange}
         handleClickSearch={props.handleClickSearch}
+      />
+      {props.open ? <NavMenu handleMenu={props.handleMenu} categories={props.categories} /> : null}
       <div>
         <ul className={styles.pcNavMenu}>
           <Link href={"/popular"}>
@@ -55,7 +39,7 @@ export const Main = (props) => {
       </div>
 
       <main className={styles.main}>
-        <Items moviesData={props.moviesData} categories={categories} />
+        <Items moviesData={props.moviesData} categories={props.categories} />
       </main>
       <Footer />
     </div>
