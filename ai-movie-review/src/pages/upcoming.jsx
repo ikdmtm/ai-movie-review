@@ -18,7 +18,15 @@ const Upcoming = (props) => {
           href="http://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css"
         ></link>
       </Head>
-      <Main open={props.open} handleMenu={props.handleMenu} moviesData={props.moviesData} />
+      <Main
+        open={props.open}
+        handleMenu={props.handleMenu}
+        moviesData={props.moviesData}
+        text={props.text}
+        handleChange={props.handleChange}
+        handleClickSearch={props.handleClickSearch}
+        categories={props.categories}
+      />
     </>
   );
 };

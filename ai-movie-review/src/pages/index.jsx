@@ -18,14 +18,22 @@ const Home = (props) => {
           href="http://mplus-fonts.sourceforge.jp/webfonts/general-j/mplus_webfonts.css"
         ></link>
       </Head>
-      <Main open={props.open} handleMenu={props.handleMenu} moviesData={props.moviesData} />
+      <Main
+        open={props.open}
+        handleMenu={props.handleMenu}
+        moviesData={props.moviesData}
+        text={props.text}
+        handleChange={props.handleChange}
+        handleClickSearch={props.handleClickSearch}
+        searchedMovies={props.searchedMovies}
+        categories={props.categories}
+      />
     </>
   );
 };
 
 export const getServerSideProps = async () => {
-  const src =
-    "https://api.themoviedb.org/3/movie/top_rated?api_key=54206ad48e363ded4ba03637e6c92d43&language=ja-JP&page=1";
+  const src = `https://api.themoviedb.org/3/movie/top_rated?api_key=54206ad48e363ded4ba03637e6c92d43&language=ja-JP&page=1`;
   try {
     const res = await fetch(src);
     if (!res.ok) {
