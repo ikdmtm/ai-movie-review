@@ -34,8 +34,9 @@ export const Main = (props) => {
 
   return (
     <div className={styles.container}>
-      <Header handleMenu={props.handleMenu} open={props.open} />
-      {props.open ? <NavMenu handleMenu={props.handleMenu} categories={categories} /> : null}
+        text={props.text}
+        handleChange={props.handleChange}
+        handleClickSearch={props.handleClickSearch}
       <div>
         <ul className={styles.pcNavMenu}>
           <Link href={"/popular"}>
