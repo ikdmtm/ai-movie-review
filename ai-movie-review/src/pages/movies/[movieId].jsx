@@ -8,31 +8,8 @@ import { NavMenu } from "@/src/components/NavMenu/NavMenu";
 import { Footer } from "@/src/components/Footer/Footer";
 import { Items } from "@/src/components/Items/Items";
 
-const categories = [
-  { id: 28, name: "アクション" },
-  { id: 12, name: "アドベンチャー" },
-  { id: 16, name: "アニメーション" },
-  { id: 35, name: "コメディ" },
-  { id: 80, name: "クライム" },
-  { id: 99, name: "ドキュメンタリー" },
-  { id: 18, name: "ドラマ" },
-  { id: 10751, name: "ファミリー" },
-  { id: 14, name: "ファンタジー" },
-  { id: 36, name: "履歴" },
-  { id: 27, name: "ホラー" },
-  { id: 10402, name: "音楽" },
-  { id: 9648, name: "謎" },
-  { id: 10749, name: "ロマンス" },
-  { id: 878, name: "SF" },
-  { id: 10770, name: "テレビ映画" },
-  { id: 53, name: "スリラー" },
-  { id: 10752, name: "戦争" },
-  { id: 37, name: "西洋" },
-];
-
 const Show = (props) => {
   const router = useRouter();
-
   return (
     <>
       <Head>
@@ -50,7 +27,9 @@ const Show = (props) => {
 
       <div className={styles.container}>
         <Header handleMenu={props.handleMenu} open={props.open} />
-        {props.open ? <NavMenu handleMenu={props.handleMenu} categories={categories} /> : null}
+        {props.open ? (
+          <NavMenu handleMenu={props.handleMenu} categories={props.categories} />
+        ) : null}
         <div>
           <ul className={styles.pcNavMenu}>
             <Link href={"/popular"}>
@@ -67,10 +46,9 @@ const Show = (props) => {
             </Link>
           </ul>
         </div>
-        <div className={styles.title}>
-          <p>- 映画詳細 -</p>
-        </div>
         <main className={styles.main}>
+          <p className={styles.title}>- 映画詳細 -</p>
+
           {props.movie ? (
             <div className={styles.box}>
               <div className={styles.left}>
@@ -100,8 +78,12 @@ const Show = (props) => {
           ) : (
             <p>データがありません</p>
           )}
-          {/* <div className={styles.box}></div> */}
-          <Items />
+          <p className={styles.title}>- 似ている映画 -</p>
+          {props.similar.length ? (
+            <Items moviesData={props.similar} categories={props.categories} />
+          ) : (
+            <p>データがありません</p>
+          )}
         </main>
         <Footer />
       </div>
@@ -111,17 +93,24 @@ const Show = (props) => {
 
 export const getServerSideProps = async (context) => {
   const { movieId } = context.query;
-  const src = `https://api.themoviedb.org/3/movie/${movieId}?api_key=54206ad48e363ded4ba03637e6c92d43&language=ja-JP`;
+  const src1 = `https://api.themoviedb.org/3/movie/${movieId}?api_key=54206ad48e363ded4ba03637e6c92d43&language=ja-JP`;
+  const src2 = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=54206ad48e363ded4ba03637e6c92d43&language=ja-JP&page=1`;
   try {
-    const res = await fetch(src);
-    if (!res.ok) {
+    const [movieRes, similarRes] = await Promise.all([fetch(src1), fetch(src2)]);
+
+    if (!movieRes.ok || !similarRes.ok) {
       throw new Error("Failed to fetch movie data from API");
     }
-    const movieData = await res.json();
+
+    const movieData = await movieRes.json();
+    const similarData = await similarRes.json();
+
     const movie = movieData || null;
+    const similar = similarData.results || null;
     return {
       props: {
         movie,
+        similar,
       },
     };
   } catch (error) {
@@ -129,6 +118,7 @@ export const getServerSideProps = async (context) => {
     return {
       props: {
         movie: null,
+        similar: null,
       },
     };
   }
