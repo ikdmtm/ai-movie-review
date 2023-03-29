@@ -3,10 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "src/components/Main/Main.module.css";
-import { Header } from "@/src/components/Header/Header";
-import { NavMenu } from "@/src/components/NavMenu/NavMenu";
-import { Footer } from "@/src/components/Footer/Footer";
-import { Items } from "@/src/components/Items/Items";
+import { Header } from "src/components/Header/Header";
+import { NavMenu } from "src/components/NavMenu/NavMenu";
+import { Footer } from "src/components/Footer/Footer";
+import { Items } from "src/components/Items/Items";
 
 const Show = (props) => {
   const router = useRouter();
