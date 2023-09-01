@@ -14,7 +14,7 @@ export const Header = (props) => {
                 <input type="search" onChange={props.handleChange} value={props.text}></input>
                 <button onClick={props.handleClickSearch}>検索</button>
             </div>
-            {props.open ? null : (
+            {/* {props.open ? null : (
                 <Image
                     src="/openMenu.png"
                     alt="Picture of the author"
@@ -23,7 +23,7 @@ export const Header = (props) => {
                     className={styles.button}
                     onClick={props.handleMenu}
                 />
-            )}
+            )} */}
         </header>
     );
 };
